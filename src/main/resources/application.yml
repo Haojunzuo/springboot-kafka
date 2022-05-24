@@ -5,7 +5,7 @@ spring:
   # kafka的配置
   kafka:
 #    listener:
-#      # 设置批量消费
+#      # 设置批量消费，批量消费信息的消费者不可与单次消费信息的消费者同时存在。
 #      type: batch
     bootstrap-servers: 192.168.117.6:9092;192.168.117.7:9092;192.168.117.8:9092
     # producer配置
@@ -17,7 +17,6 @@ spring:
       batch-size: 16384
       # 生产者端总的可用发送缓冲区大小，设置为32MB
       buffer-memory: 33554432
-
 
     # consumer配置
     consumer:
