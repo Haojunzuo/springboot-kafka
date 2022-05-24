@@ -1,0 +1,39 @@
+server:
+  port: 8082
+
+spring:
+  # kafka的配置
+  kafka:
+#    listener:
+#      # 设置批量消费
+#      type: batch
+    bootstrap-servers: 192.168.117.6:9092;192.168.117.7:9092;192.168.117.8:9092
+    # producer配置
+    producer:
+      # 生产者配置key和value的序列化器
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.apache.kafka.common.serialization.StringSerializer
+      # 生产者每个批次最多放多少条记录
+      batch-size: 16384
+      # 生产者端总的可用发送缓冲区大小，设置为32MB
+      buffer-memory: 33554432
+
+
+    # consumer配置
+    consumer:
+      # 消费者配置key和value的序列化器
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      # 生产者组
+      group-id: test
+      # 如果在kafka中找不到当前消费者的偏移量，则直接将偏移量设置为最早的
+      auto-offset-reset: earliest
+      # 消费者的偏移量是自动提交还是手动提交，设置为自动提交
+      enable-auto-commit: true
+      # 消费者偏移量自动提交时间间隔
+      auto-commit-interval: 1000
+      # 批量消费每次最多消费多少条消息
+      max-poll-records: 50
+
+
+
